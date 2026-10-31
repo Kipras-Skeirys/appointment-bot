@@ -62,7 +62,7 @@ def notify(msg):
         print("Error:", e)
     time.sleep(1)
 
-def proccess_data():
+def process_data():
   # [x] Proccess data
     html_content = browser.page_source
     soup = BeautifulSoup(html_content, 'html.parser')
@@ -117,12 +117,12 @@ try:
                         if browser.current_url != appointment_url:
                             browser.get(appointment_url)
                             if browser.current_url != appointment_url:
-                                notify('[SESSION LOST] login require...')
+                                notify('[SESSION LOST] login required...')
                                 break
                             else:
-                                proccess_data()
+                                process_data()
                         else:
-                            proccess_data()
+                            process_data()
                         # [x] Timeout for 5minutes
                         countdown_timer(300)
                         browser.refresh()
@@ -131,7 +131,7 @@ try:
                     pass
         except KeyboardInterrupt:
             browser.quit()
-            clean_print(f'{Fore.WHITE}{Back.RED}Script stoped{Style.RESET_ALL}')
+            clean_print(f'{Fore.WHITE}{Back.RED}Script stopped{Style.RESET_ALL}')
             sys.exit(1)
             pass
         except Exception as e:
