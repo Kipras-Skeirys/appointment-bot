@@ -6,8 +6,14 @@ import time
 from colorama import Fore, Back, Style, init
 import sys
 import json
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 init()
+
+PUSHOVER_API_TOKEN = os.environ['PUSHOVER_API_TOKEN']
+PUSHOVER_USER_KEY = os.environ['PUSHOVER_USER_KEY']
 
 start_url = ''
 appointment_url = ''
@@ -47,8 +53,8 @@ def notify(msg):
         # Reuse the existing connection
         pushover_conn.request("POST", "/1/messages.json",
             urllib.parse.urlencode({
-              "token": '<TOLKEN>',
-              "user": '<USER>',
+              "token": PUSHOVER_API_TOKEN,
+              "user": PUSHOVER_USER_KEY,
               "message": msg,
             }), {"Content-type": "application/x-www-form-urlencoded"})
         pushover_conn.getresponse()
