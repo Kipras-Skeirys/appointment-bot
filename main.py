@@ -35,13 +35,7 @@ def clean_print(message):
     sys.stdout.flush()
 
 def countdown_timer(seconds):
-    start_time = time.time()
     for i in range(seconds, 0, -1):
-        iteration_start_time = time.time()
-        elapsed_iteration_time = time.time() - iteration_start_time
-        if elapsed_iteration_time > 1:
-            clean_print('break happened')
-            break
         clean_print(f"{Fore.BLACK}{Back.WHITE}Time until next reload:{Style.RESET_ALL} {i}s")
         time.sleep(1)
     clean_print('')
