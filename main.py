@@ -44,7 +44,6 @@ def countdown_timer(seconds):
 def notify(msg):
     pushover_conn = http.client.HTTPSConnection("api.pushover.net:443")
     try:
-        # Reuse the existing connection
         pushover_conn.request("POST", "/1/messages.json",
             urllib.parse.urlencode({
               "token": PUSHOVER_API_TOKEN,
@@ -57,7 +56,6 @@ def notify(msg):
     time.sleep(1)
 
 def process_data():
-  # [x] Proccess data
     html_content = browser.page_source
     soup = BeautifulSoup(html_content, 'html.parser')
     rows = soup.find_all('tr', class_='values')
@@ -101,13 +99,12 @@ try:
                 browser.get(start_url)
                 browser.execute_script("localStorage.setItem('randid', '')")
                 input("\rPress Enter after manually logging in...")
-                # [x] Switch to the new tab
+                # Login opens the app in a new tab; switch to it
                 browser.close()
                 browser.switch_to.window(browser.window_handles[-1])
-                # [x] Infinite loop
                 try:
                     while True:
-                        # [x] Check if on correct page and session is not lost
+                        # A redirect away from the appointments page means the session was lost
                         if browser.current_url != appointment_url:
                             browser.get(appointment_url)
                             if browser.current_url != appointment_url:
@@ -117,7 +114,6 @@ try:
                                 process_data()
                         else:
                             process_data()
-                        # [x] Timeout for 5minutes
                         countdown_timer(300)
                         browser.refresh()
                 except KeyboardInterrupt:
