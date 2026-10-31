@@ -3,14 +3,14 @@ from bs4 import BeautifulSoup
 import datetime
 import http.client, urllib
 import time
-from colorama import Fore, Back, Style, init
+from colorama import Fore, Back, Style, init as colorama_init
 import sys
 import json
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
-init()
+colorama_init()
 
 PUSHOVER_API_TOKEN = os.environ['PUSHOVER_API_TOKEN']
 PUSHOVER_USER_KEY = os.environ['PUSHOVER_USER_KEY']
